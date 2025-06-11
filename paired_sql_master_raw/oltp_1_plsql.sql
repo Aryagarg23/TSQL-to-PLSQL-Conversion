@@ -1,0 +1,1 @@
+alter session set sort_area_size=5000000

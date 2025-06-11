@@ -1,0 +1,1 @@
+SELECT Median (l_discount) FROM orders , customer , lineitem , nation WHERE c_custkey = o_custkey AND o_orderkey = l_orderkey AND c_nationkey = n_nationkey AND n_name = 'GERMANY' AND o_orderdate BETWEEN To_date ( '1995 - 01 - 01' , 'YYYY - MM - DD') AND To_date ( '1995 - 12 - 31' , 'YYYY - MM - DD')

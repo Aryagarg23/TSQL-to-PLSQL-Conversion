@@ -1,0 +1,1 @@
+select o_orderpriority, count_big(*) as order_count from orders where o_orderdate >= ':1' and o_orderdate < dateadd(mm,3,cast(':1'as datetime)) and exists ( select * from lineitem where l_orderkey = o_orderkey and l_commitdate < l_receiptdate) group by o_orderpriority order by o_orderpriority option (maxdop $maxdop)

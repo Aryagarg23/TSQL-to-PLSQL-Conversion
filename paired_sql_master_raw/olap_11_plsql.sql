@@ -1,0 +1,1 @@
+SELECT * FROM ( SELECT p_partkey , Count ( *) ocount FROM lineitem , part WHERE l_orderkey NOT IN ( SELECT o_orderkey FROM orders) AND l_partkey = p_partkey AND l_suppkey NOT IN ( SELECT s_suppkey FROM supplier) AND l_discount < 0.5 AND p_size < 41 GROUP BY p_partkey ORDER BY 1, 2) WHERE ROWNUM < 100

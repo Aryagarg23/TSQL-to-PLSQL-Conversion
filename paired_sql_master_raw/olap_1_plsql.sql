@@ -1,0 +1,1 @@
+alter session force parallel dml parallel (degree $degree_of_parallel)

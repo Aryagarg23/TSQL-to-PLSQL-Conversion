@@ -1,0 +1,63 @@
+# Axolotl config for fine-tuning the cutting-edge Mistral-Small-24B model
+# This configuration is optimized for a 24GB GPU.
+
+# --- Core Model Configuration (UPGRADED to MISTRAL) ---
+# We are now using the powerful and efficient Mistral-Small model.
+base_model: mistralai/Mistral-Small-3.1-24B-Instruct-2503
+# The model architecture is based on Mistral's design.
+# We explicitly set the model_type and tokenizer_type to ensure compatibility.
+model_type: AutoModelForCausalLM
+tokenizer_type: AutoTokenizer
+
+# --- Performance & Memory Optimization ---
+# These settings are still critical for fitting the model in memory.
+flash_attention: true
+load_in_4bit: true
+# THIS IS THE FIX: Explicitly tell Axolotl to use the LoRA adapter.
+adapter: lora
+
+
+datasets:
+  - path: tsql_plsql_final_training_dataset.jsonl
+    # THIS IS THE FIX: Revert to the stable and universally compatible 'alpaca' type.
+    # Axolotl will automatically use the correct chat template for the Mistral model.
+    type: alpaca
+    
+# Let's give our new model a new name.
+output_dir: ./mistral-tsql-to-plsql-adapter-v1
+
+# --- Training Hyperparameters (ADJUSTED FOR MISTRAL) ---
+# The maximum number of tokens in a single training example.
+sequence_len: 2048
+
+# Because Mistral is more efficient, we can likely use a larger batch size than with the 34B model.
+# This will speed up training. We'll start with 2.
+micro_batch_size: 2
+gradient_accumulation_steps: 2
+
+# We can stick with 3 epochs. The model is a fast learner.
+num_epochs: 3
+# A standard learning rate for fine-tuning.
+learning_rate: 2e-5
+optimizer: paged_adamw_8bit
+
+# --- LoRA Configuration ---
+# These are standard LoRA values.
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+# Target modules for Mistral models are slightly different from Llama. This is a common configuration.
+lora_target_modules:
+  - q_proj
+  - v_proj
+  - k_proj
+  - o_proj
+
+# --- Logging and Saving ---
+logging_steps: 5
+val_set_size: 0.05
+save_steps: 50
+special_tokens:
+  bos_token: "<s>"
+  eos_token: "</s>"
+  unk_token: "<unk>"

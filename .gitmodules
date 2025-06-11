@@ -1,0 +1,3 @@
+[submodule "HammerDB"]
+	path = HammerDB
+	url = https://github.com/TPC-Council/HammerDB.git

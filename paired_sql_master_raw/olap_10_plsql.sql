@@ -1,0 +1,1 @@
+SELECT * FROM ( SELECT p_partkey , Count ( *) ocount FROM lineitem , part WHERE l_partkey = p_partkey AND NOT EXISTS ( SELECT o_orderkey FROM orders WHERE o_orderkey = l_orderkey) AND NOT EXISTS ( SELECT 1 FROM supplier WHERE l_suppkey = s_suppkey) AND l_discount < 1.1 AND p_size < 45 GROUP BY p_partkey ORDER BY 1 , 2)

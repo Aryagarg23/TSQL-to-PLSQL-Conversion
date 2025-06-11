@@ -1,0 +1,1 @@
+alter session force parallel query parallel (degree $degree_of_parallel)

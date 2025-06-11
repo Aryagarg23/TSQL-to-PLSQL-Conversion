@@ -1,0 +1,74 @@
+# --- General Python ---
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment folders
+.env
+.venv
+env/
+venv/
+ENV/
+# If you created the conda env inside the project folder (not recommended, but good to have)
+tsql-finetune-py311/ 
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Axolotl & LLM Specific ---
+# The trained adapter model directories
+# This is a pattern to catch all adapter outputs
+*-adapter-v*/
+
+# The downloaded base models from Hugging Face (can be very large)
+# These are typically stored in ~/.cache/huggingface/hub, but this is a safeguard
+# if you configured a local cache directory.
+hub/
+.huggingface/
+.cache/
+
+# Axolotl specific cache and run directories
+last_run_prepared/
+multipack-data.jsonl
+
+# The final, generated datasets
+*.jsonl
+
+# Any raw data extracted from HammerDB
+paired_sql_master_raw/
+paired_olap_dataset_raw/
+paired_full_dataset_raw/
+paired_sql_data/
+
+# --- IDE / Editor specific ---
+.vscode/
+.idea/
+*.swp
+*~
+
+# --- OS specific ---
+.DS_Store
+Thumbs.db
+
+# --- Log files ---
+*.log
+logs/
